@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    ".env": "bat",
+    "iostream": "cpp",
+    "exception": "cpp",
+    "memory": "cpp"
+  }
+}
