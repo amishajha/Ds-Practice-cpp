@@ -1,61 +1,114 @@
 #include<iostream>
 using namespace std;
 
-void swap(int *xp,int *yp){
-int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+
+int partition(int arr[] , int s,int e){
 
 
+int pivot = arr[s];
+int count = 0;
+
+for(int k = s+1 ;k <=e; k++ ){
+
+
+  if(arr[k]<=pivot){
+
+    count++;
+  }
 
 }
 
+// swap with pivotindex
+int pivotindex = s+count;
+swap(arr[pivotindex],arr[s]);
+
+// set smaller elements than pivot in left and larger in right
 
 
-int  Partition(int arr[],int l,int h){
+int i = s;
+int j = e;
+while ( i < pivotindex && j > pivotindex){
 
-int pivot=arr[l];
-int i=l;
-int j=h;
-while(i<j){
+    while(arr[i]<=pivot){
+        i++;
+    }
 
-    while(arr[i]<=pivot) i++;
-    while(arr[j]>pivot)j--;
-    if(i<j){
-        swap(&arr[i],&arr[j]);
+    while(arr[j]>pivot){
+        j--;
+    }
+    if(i<pivotindex && j > pivotindex){
+        swap(arr[i++],arr[j--]);
     }
 
 
 
 
 }
-swap(&arr[l],&arr[j]);
-return j;
 
 
-
+return pivotindex;
 
 }
 
 
 
-int printarray(int arr[],int n){
-for(int i=0;i<n;i++){
-    cout<<arr[i]<<endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void quickSort(int arr[] ,int s,int e){
+
+
+if(s>=e){
+    return;
 }
 
-}
 
 
-void quickSort(int arr[],int l,int h){
+int p = partition(arr,s,e);
+quickSort(arr,s,p-1);
+quickSort(arr,p+1,e);
 
-if(l<h){
 
 
-    int  pivot=Partition(arr,l,h);
-    quickSort(arr,l,pivot-1);
-    quickSort(arr,pivot+1,h);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -79,11 +132,15 @@ if(l<h){
 
 
 int main(){
-int arr[] = {10, 7, 8, 9, 1, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int n = 6;
+int arr[6] = {10, 7, 8, 9, 1, 5};
+  
     quickSort(arr, 0, n - 1);
     cout << "Sorted array: \n";
-    printarray(arr, n);
+    for(int i = 0;i<n;i++){
+        cout<<arr[i]<< " ";
+        
+    }
     return 0;
 
 
