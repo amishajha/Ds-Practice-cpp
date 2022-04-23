@@ -4,30 +4,45 @@
 using namespace std;
 
  vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int,int>mp;
+       unordered_map<int,int>mp;
         vector<int>ans;
+        priority_queue<pair<int,int>>pq;
+//          if(nums.size()==1){
+//             return nums;
+//         }
+        
+        // if(nums.size()==k){
+        //     return nums;
+        // }
         for(int i = 0;i<nums.size();i++){
             mp[nums[i]]++;
         }
         
-      
-          int l=1;
-           for(auto i : mp){
-               if(i.second>1){
-                   ans.push_back(i.first);
-               }
-               
-               if(l>k){
-                   break;
-               }
-               l++;
-           }
-           
-           
-           
-           
-           
+        
+        for(auto &pair :mp){
+            pq.emplace(pair.second,pair.first);
+            
+        }
+        
+        while(k--){
+            ans.push_back(pq.top().second);
+            pq.pop();
+        }
        
+      
+//           int l=1;
+//            for(auto i : mp){
+//                if(i.second>1){
+//                    ans.push_back(i.first);
+//                }
+               
+//                if(l>k){
+//                    break;
+//                }
+//                l++;
+//            }
+           
+           
         return ans;
         
     }
